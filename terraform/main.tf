@@ -21,7 +21,7 @@ module "ecs" {
   task_role_arn         = module.iam.ecs_task_role_arn
   container_image       = var.container_image
   private_subnet_ids    = module.vpc.private_subnet_ids
-  security_group_ids    = var.security_group_ids
+#  security_group_ids    = var.security_group_ids
 }
 
 module "alb" {
@@ -29,7 +29,7 @@ module "alb" {
   
   vpc_id              = module.vpc.vpc_id
   public_subnet_ids   = module.vpc.public_subnet_ids
-  security_group_ids  = var.security_group_ids
+#  security_group_ids  = var.security_group_ids
 }
 
 module "iam" {

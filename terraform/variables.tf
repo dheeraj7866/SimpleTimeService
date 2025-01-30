@@ -44,10 +44,10 @@ variable "container_image" {
   type        = string
 }
 
-variable "security_group_ids" {
-  description = "List of security group IDs for ECS and ALB"
-  type        = list(string)
-}
+#variable "security_group_ids" {
+#  description = "List of security group IDs for ECS and ALB"
+#  type        = list(string)
+#}
 
 variable "ecs_execution_role_arn" {
   description = "The ARN of the ECS execution role"

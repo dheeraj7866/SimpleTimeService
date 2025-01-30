@@ -18,7 +18,7 @@ variable "private_subnet_ids" {
   description = "The IDs of the private subnets"
 }
 
-variable "security_group_ids" {
-  type        = list(string)
-  description = "The security group IDs for the ECS service"
-}
+#variable "security_group_ids" {
+#  type        = list(string)
+#  description = "The security group IDs for the ECS service"
+#}
