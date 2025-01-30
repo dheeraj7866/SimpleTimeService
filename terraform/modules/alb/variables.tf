@@ -8,7 +8,7 @@ variable "public_subnet_ids" {
   description = "The IDs of the public subnets"
 }
 
-variable "security_group_ids" {
-  type        = list(string)
-  description = "The security group IDs for the ALB"
-}
+#variable "security_group_ids" {
+#  type        = list(string)
+#  description = "The security group IDs for the ALB"
+#}
