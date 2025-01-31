@@ -2,7 +2,7 @@ resource "aws_lb" "simpletimeservice_alb" {
   name               = "simpletimeservice-alb"
   internal           = false
   load_balancer_type = "application"
-  security_groups   = var.aws_security_group.elb_sg
+  security_groups   = var.alb_sg
   subnets            = var.public_subnet_ids
 }
 

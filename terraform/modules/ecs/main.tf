@@ -31,7 +31,7 @@ resource "aws_ecs_service" "simpletimeservice_service" {
   launch_type     = "FARGATE"
   network_configuration {
     subnets          = var.private_subnet_ids
-    security_groups = var.aws_security_group.ecs_sg
+    security_groups = var.ecs_sg
     assign_public_ip = false
   }
 }
