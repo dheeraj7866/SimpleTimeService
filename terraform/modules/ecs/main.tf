@@ -31,33 +31,10 @@ resource "aws_ecs_service" "simpletimeservice_service" {
   launch_type     = "FARGATE"
   network_configuration {
     subnets          = var.private_subnet_ids
-    security_groups = aws_security_group.ecs_sg.id
+    security_groups = var.aws_security_group.ecs_sg
     assign_public_ip = false
   }
 }
 
-resource "aws_security_group" "ecs_sg" {
-  name        = "ecs-sg"
-  description = "Allow inbound traffic from ELB and outbound for ECS service"
-  vpc_id      = aws_vpc.main.id
-
-  ingress {
-    from_port   = 5000
-    to_port     = 5000
-    protocol    = "tcp"
-    security_groups = [aws_security_group.elb_sg.id]  # Allow traffic from the ELB
-  }
-
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  tags = {
-    Name = "ecs-sg"
-  }
-}
 
 
