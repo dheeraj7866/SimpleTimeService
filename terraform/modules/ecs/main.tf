@@ -23,6 +23,30 @@ resource "aws_ecs_task_definition" "simpletimeservice_task" {
   }])
 }
 
+resource "aws_security_group" "ecs_sg" {
+  name        = "ecs-sg"
+  description = "Allow inbound traffic from ELB and outbound for ECS service"
+  vpc_id      = var.vpc_id
+
+  ingress {
+    from_port        = 5000
+    to_port          = 5000
+    protocol         = "tcp"
+    security_groups  = [aws_security_group.elb_sg.id]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "ecs-sg"
+  }
+}
+
 resource "aws_ecs_service" "simpletimeservice_service" {
   name            = "simpletimeservice-service"
   cluster         = aws_ecs_cluster.simpletimeservice_cluster.id
@@ -31,7 +55,7 @@ resource "aws_ecs_service" "simpletimeservice_service" {
   launch_type     = "FARGATE"
   network_configuration {
     subnets          = var.private_subnet_ids
-    security_groups = var.ecs_sg
+    security_groups = aws_security_group.ecs_sg.id
     assign_public_ip = false
   }
 }
